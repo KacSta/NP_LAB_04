@@ -6,38 +6,64 @@ on:
       - main
 
 jobs:
-  check-syntax:
-    runs-on: ${{ matrix.os }}
-    
+  check-syntax-ubuntu:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: [3.9, 3.10, 3.11]
-
+        python-version: [3.9, 3.11]
     steps:
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Upgrade pip
-      run: |
-        python -m pip install --upgrade pip
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip
 
-    - name: Install flake8 and unittest
-      run: |
-        python -m pip install flake8
-        python -m pip install -r requirements.txt  # Zakładam, że masz plik z zależnościami dla unittest
+      - name: Install flake8 and unittest
+        run: |
+          python -m pip install flake8
+          python -m pip install -r requirements.txt  # Zakładam, że masz plik z zależnościami dla unittest
 
-    - name: Display Python version
-      run: python --version
+      - name: Display Python version
+        run: python --version
 
-    - name: Run flake8
-      run: |
-        python -m flake8
+      - name: Run flake8
+        run: |
+          python -m flake8
 
-    - name: Run unittest
-      run: |
-        python -m unittest discover -v
+      - name: Run unittest
+        run: |
+          python -m unittest discover -v
 
-    if: matrix.os == 'ubuntu-latest' && matrix.python-version != '3.10'
+  check-syntax-windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: [3.9, 3.10, 3.11]
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Install flake8 and unittest
+        run: |
+          python -m pip install flake8
+          python -m pip install -r requirements.txt  # Zakładam, że masz plik z zależnościami dla unittest
+
+      - name: Display Python version
+        run: python --version
+
+      - name: Run flake8
+        run: |
+          python -m flake8
+
+      - name: Run unittest
+        run: |
+          python -m unittest discover -v
