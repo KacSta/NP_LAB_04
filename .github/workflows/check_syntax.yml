@@ -1,9 +1,6 @@
 name: check_syntax
 
-on:
-  push:
-    branches:
-      - check_syntax
+on: [push, pull_request]
 
 jobs:
   check-syntax:
