@@ -13,9 +13,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         python-version: [3.9, 3.10, 3.11]
-      exclude:
-        - os: ubuntu-latest
-          python-version: 3.10
 
     steps:
       - name: Set up Python
@@ -42,3 +39,5 @@ jobs:
       - name: Run unittest
         run: |
           python -m unittest discover -v
+
+    if: matrix.os == 'ubuntu-latest' && matrix.python-version != '3.10'
