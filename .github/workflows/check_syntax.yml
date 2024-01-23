@@ -25,10 +25,8 @@ jobs:
 
     - name: Upgrade pip
       run: |
+        pip freeze > requirements.txt
         python -m pip install --upgrade pip
-
-    - name: Check if requirements.txt exists
-      run: test -e requirements.txt || echo "No requirements.txt file"
 
     - name: Install flake8 and unittest
       run: |
