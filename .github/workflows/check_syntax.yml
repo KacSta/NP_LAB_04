@@ -3,7 +3,7 @@ name: check_syntax
 on:
   push:
     branches:
-      - main
+      - check_syntax
 
 jobs:
   check-syntax:
@@ -12,8 +12,6 @@ jobs:
     strategy:
       matrix:
         python-version: [3.9, 3.10, 3.11]
-        exclude:
-        - python-version: 3.10
 
     steps:
     - name: Set up Python
