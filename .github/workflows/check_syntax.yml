@@ -41,4 +41,4 @@ jobs:
         flake8
     - name: Run unittest
       run: |
-        python -m unittest discover -v /github/workspace
+        python -m unittest discover -v /github/workflows
